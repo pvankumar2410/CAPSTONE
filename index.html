@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Race Report Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            align-items: flex-start;
+           
+        }
+
+        .image-container {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .form-container {
+            flex: 1;
+            padding: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .form {
+
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form label {
+            color: red;
+
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form input {
+            width: 90%;
+            padding: 6px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .form button:hover {
+            background-color: #0056b3;
+        }
+
+        strong {
+
+            text-align: justify;
+            font-weight: normal;
+            display: block;
+
+        }
+    </style>
+</head>
+
+<body>                
+
+    <div class="container">
+        <div class="image-container" >
+            <img src="https://images3.alphacoders.com/135/1352896.png" alt="Race Image" width="1250px" height="600px">
+            <div >
+                <p style="font-size: 30px;text-align: center;"> <span>
+                    <p style="font-size: 30px; text-align: center;">
+                        <table class="f1-data-table">
+                            <thead>
+                              <tr>
+                                <th>Race Laps</th>
+                                <th>Race Points</th>
+                                <th>Avg Speed (km/h)</th>
+                                <th>Practice Laps</th>
+                                <th>Practice Pos</th>
+                                <th>Fastest Laps</th>
+                                <th>Start Grid No</th>
+                                <th>Start Grid Pos</th>
+                                <th>Qualifying Laps</th>
+                                <th>Pit Stops</th>
+                                <th>Practice Time (s)</th>
+                                <th>Start Time (s)</th>
+                                <th>Fastest Lap Time (s)</th>
+                                <th>DNF</th>
+                                <th>Pit Stop (h:m:s)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>{{ raceLaps }}</td>
+                                <td>{{ racePoints }}</td>
+                                <td>{{ avgSpeed }}</td>
+                                <td>{{ practiceLaps }}</td>
+                                <td>{{ practicePos }}</td>
+                                <td>{{ noOfFastLap }}</td>
+                                <td>{{ startgridNo }}</td>
+                                <td>{{ startgridPos }}</td>
+                                <td>{{ qualifyingLaps }}</td>
+                                <td>{{ stops }}</td>
+                                <td>{{ practiceTimeSeconds }}</td>
+                                <td>{{ startgridTimeSeconds }}</td>
+                                <td>{{ timeTakenInFastLapSeconds }}</td>
+                                <td>{{ dnf }}</td>
+                                <td>{{ pitstopHour }}:{{ pitstopMinute }}:{{ pitstopSecond }}</td>
+                              </tr>
+                            </tbody>
+                            <tr>
+                                <td colspan="15">
+                                  <span class="race-position">THE RACE POSITION IS: <br>{{key}}</span>
+                                </td>
+                              </tr>
+                          </table>
+                          <style>
+                            .f1-data-table {
+  font-family: Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.f1-data-table th,
+.f1-data-table td {
+  text-align: center;
+  padding: 10px;
+  border: 2px solid #080707;
+}
+
+.f1-data-table thead th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+.race-position {
+  font-family: "Ubuntu", Arial, sans-serif; /* Modern, clean font */
+  font-size: 18px; /* Slightly larger font size */
+  color: #f00; /* Red color for emphasis */
+  text-align: center;
+  /* Stylish elements */
+  border-radius: 10px; /* More rounded corners */
+  padding: 10px 20px; /* More padding for better readability */
+  background-color: rgba(0, 0, 0, 0.2); /* Semi-transparent black background */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Subtle shadow effect */
+}
+/* Optional - Style for DNF cell */
+.f1-data-table .dnf {
+  color: red;
+}
+
+                          </style>
+               
+         </div>
+        </div>
+
+        <div class="form-container">
+            <div class="form">
+                <form id="myform" method="POST" action="{% url 'myresponse' %}">
+                    {% csrf_token %}
+
+                    <strong style="text-align: center;">          <img src="https://media.giphy.com/avatars/f1/rdGC9oaYNppb.jpg   " width="125px" height="60px">
+                        <br> F1 Race Position</strong>
+                        <br>
+                    <label for="raceLaps">Race Laps</label>
+                    <input type="number" id="raceLaps" name="raceLaps" required>
+
+                    <label for="racePoints">Race Points</label>
+                    <input type="number" id="racePoints" name="racePoints" required>
+
+                    <label for="avgSpeed">Average Speed</label>
+                    <input type="number" id="avgSpeed" name="avgSpeed" required>
+
+                    <label for="practiceLaps">Practice Laps</label>
+                    <input type="number" id="practiceLaps" name="practiceLaps" required>
+
+                    <label for="practicePos">Practice Pos</label>
+                    <input type="number" id="practicePos" name="practicePos" required>
+
+                    <label for="noOfFastLap">Number of Fast Laps</label>
+                    <input type="number" id="noOfFastLap" name="noOfFastLap" required>
+
+                    <label for="startgridNo">Startgrid Number</label>
+                    <input type="number" id="startgridNo" name="startgridNo" required>
+
+                    <label for="startgridPos">Startgrid Pos</label>
+                    <input type="number" id="startgridPos" name="startgridPos" required>
+
+                    <label for="qualifyingLaps">Qualifying Laps</label>
+                    <input type="number" id="qualifyingLaps" name="qualifyingLaps" required> 
+
+                    <label for="stops">Stops</label>
+                    <input type="number" id="stops" name="stops" required>
+
+                    <label for="practiceTimeSeconds">Practice Time (seconds)</label >
+                    <input type="number" id="practiceTimeSeconds" name="practiceTimeSeconds" required>
+
+                    <label for="startgridTimeSeconds">Startgrid Time (seconds)</label>
+                    <input type="number" id="startgridTimeSeconds" name="startgridTimeSeconds" required>
+
+                    <label for="timeTakenInFastLapsSeconds">Time taken in Fast Laps (seconds)</label>
+                    <input type="number" id="timeTakenInFastLapsSeconds" name="timeTakenInFastLapsSeconds" required>
+
+                    <label for="lapCount">Lap Count</label>
+                    <input type="number" id="lapCount" name="lapCount" required>
+
+                    <label for="dnf">DNF</label>
+                    <input type="number" id="dnf" name="dnf" required>
+
+                    <label for="pitstopHour">Pitstop Hour</label>
+                    <input type="number" id="pitstopHour" name="pitstopHour" required>
+
+                    <label for="pitstopMinute">Pitstop Minute</label>
+                    <input type="number" id="pitstopMinute" name="pitstopMinute" required>
+
+                    <label for="pitstopSecond">Pitstop Second</label>
+                    <input type="number" id="pitstopSecond" name="pitstopSecond" required>
+                    <button type="submit" id="send-btn">Submit</button>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+
+</html>
